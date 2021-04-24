@@ -2,7 +2,7 @@ name: learn-github-actions
 on: [push]
 jobs:
   self-hosted-test
-    runs-on: [self-hosted, linux]
+    runs-on: [self-hosted, Linux, postgresql]
     steps:
       - run: psql --version
 
