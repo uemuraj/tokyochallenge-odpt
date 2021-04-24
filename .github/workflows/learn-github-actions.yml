@@ -1,0 +1,8 @@
+name: learn-github-actions
+on: [push]
+jobs:
+  self-hosted-test
+    runs-on: [self-hosted, linux]
+    steps:
+      - run: psql --version
+
