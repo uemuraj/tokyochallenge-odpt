@@ -4,7 +4,7 @@ on:
     branches:
       - master
   schedule:
-    - cron: '5 5 * * *'
+    - cron: '31 19 * * *'
 jobs:
   refresh-table-data:
     runs-on: [self-hosted, Linux, postgresql]
