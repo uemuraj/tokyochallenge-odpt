@@ -6,8 +6,10 @@ on:
   schedule:
     - cron: '5 5 * * *'
 jobs:
-  self-hosted-test:
+  refresh-table-data:
     runs-on: [self-hosted, Linux, postgresql]
     steps:
+      - uses: actions/checkout@v2
+      - run: ls -la
       - run: ./odpt_dump.sh Station | psql -1
 
