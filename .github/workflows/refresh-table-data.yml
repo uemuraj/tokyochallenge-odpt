@@ -15,4 +15,5 @@ jobs:
           ACL_CONSUMERKEY: ${{ secrets.ACL_CONSUMERKEY }}
         run: |
           ./odpt_dump.sh Station | psql -1
+          ./odpt_dump.sh Railway | psql -1
 

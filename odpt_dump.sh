@@ -7,11 +7,11 @@ table_dump=$(curl -sS -L https://api-tokyochallenge.odpt.org/api/v4/odpt:$RDF_TY
 table_name=${RDF_TYPE,,}
 
 echo "\\timing on"
-echo "CREATE TABLE IF NOT EXISTS ${table_name} (data jsonb NOT NULL);"
+echo "CREATE TABLE IF NOT EXISTS ${table_name} (same text PRIMARY KEY, data jsonb NOT NULL);"
 echo "TRUNCATE TABLE ${table_name};"
 
 IFS=$'\n'
 for data in ${table_dump}
 do
-  echo "INSERT INTO ${table_name} VALUES ('${data}'::jsonb);"
+  echo "INSERT INTO ${table_name} VALUES ('${data}'::jsonb->>'owl:sameAs', '${data}'::jsonb);"
 done
