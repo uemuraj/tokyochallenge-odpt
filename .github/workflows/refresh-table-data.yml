@@ -10,6 +10,9 @@ jobs:
     runs-on: [self-hosted, Linux, postgresql]
     steps:
       - uses: actions/checkout@v2
-      - run: env
-      - run: ./odpt_dump.sh Station | psql -1
+      - shell: bash
+        env:
+          ACL_CONSUMERKEY: ${{ secrets.ACL_CONSUMERKEY }}
+        run: |
+          ./odpt_dump.sh Station | psql -1
 
