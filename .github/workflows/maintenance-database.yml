@@ -20,4 +20,4 @@ jobs:
         run: pg_dump --schema-only --no-owner --clean --if-exists > database_schema.sql
       - uses: actions/upload-artifact@v2
         with:
-          path: *.sql
+          path: database_schema.sql
