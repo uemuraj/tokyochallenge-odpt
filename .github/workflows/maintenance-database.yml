@@ -1,0 +1,24 @@
+name: maintenance-database
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: '31 19 * * *'
+jobs:
+  maintenance-database:
+    runs-on: [self-hosted, Linux, postgresql]
+    steps:
+      - uses: actions/checkout@v2
+      - name: udpate-database
+        env:
+          ACL_CONSUMERKEY: ${{ secrets.ACL_CONSUMERKEY }}
+        run: |
+          ./odpt_dump.sh Railway | psql --quiet --single-transaction
+          ./odpt_dump.sh Station | psql --quiet --single-transaction
+      - name: backup-database-schema
+        run: |
+          pg_dump --schema-only --no-owner --clean --if-exists > database_schema.sql
+      - uses: actions/upload-artifact@v2
+        with:
+          path: *.sql
