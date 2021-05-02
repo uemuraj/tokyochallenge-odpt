@@ -17,8 +17,7 @@ jobs:
           ./odpt_dump.sh Railway | psql --quiet --single-transaction
           ./odpt_dump.sh Station | psql --quiet --single-transaction
       - name: backup-database-schema
-        run: |
-          pg_dump --schema-only --no-owner --clean --if-exists > database_schema.sql
+        run: pg_dump --schema-only --no-owner --clean --if-exists > database_schema.sql
       - uses: actions/upload-artifact@v2
         with:
           path: *.sql
